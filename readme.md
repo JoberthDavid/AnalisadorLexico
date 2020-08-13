@@ -1,3 +1,5 @@
+REV1
+
 Resultado da implementação de um analisador léxico para analisar um programa-fonte considerando as seguintes características da linguagem:
 
 * palavras reservadas: while, do

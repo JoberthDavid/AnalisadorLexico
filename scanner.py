@@ -11,13 +11,10 @@
 # while palavra reservada 5 (0,0)
 # Parar o scanner ao encontrar o erro: Token desconhecido na posição (x,y)
 
-file_to_be_analyzed = "informar_nome_do_arquivo.txt"
+file_to_be_analyzed = "file_to_be_analyzed.txt"
 
-palavras_reservadas = {
-    'w':'while',
-    'd': 'do',
-}
-operadores = [ ' < ',' = ',' + ']
+palavras_reservadas = ['while','do']
+operadores = ['<','=','+']
 terminador_linha = [';',]
 identificadores = ['i','j']
 numeros = ['0','1','2','3','4','5','6','7','8','9']
@@ -30,32 +27,52 @@ with open(file_to_be_analyzed, "r") as file_handler:
     rows = file_handler.readlines()
     m = 0
     for row in rows:
-        m += m
         token1 = palavras_reservadas
         token2 = operadores
         token3 = terminador_linha
         token4 = identificadores
         token5 = numeros
         lista = []
+        termo = ''
         for col in range(len(row)):
-            if token1.get(row[col]):
-                tabela_tokens.write('{},palavra reservada,{},({},{})\n'.format(token1.get(row[col]),len(token1.get(row[col])),m,col))
-                #col += len(token1.get(row[col]))
-            
-            elif row[col] in token2:
-                tabela_tokens.write('{},operador,{},({},{})\n'.format(row[col],len(row[col]),m,col))
-                
-            elif row[col] in token3:
-                tabela_tokens.write('{},terminador de linha,{},({},{})\n'.format(row[col],len(row[col]),m,col))
 
-            elif row[col] in token4:
-                tabela_tokens.write('{},identificador,{},({},{})\n'.format(row[col],len(row[col]),m,col))
+            if (row[col] in token3):
+                lista.append(row[col])              
+            elif (row[col] in token2):
+                lista.append(row[col])
+            elif row[col] != ' ':
+                termo = termo + row[col]
+            else:
+                lista.append(termo)
+                termo = ''
+
+        col=0
+        espacos = 0
+        tam = 0
+
+        for token in lista:
+
+            if token in token1:
+                tabela_tokens.write('{},palavra reservada,{},({},{})\n'.format(token,len(token),m,espacos + tam))
+
+            elif token in token2:
+                tabela_tokens.write('{},operador,{},({},{})\n'.format(token,len(token),m,espacos + tam))
+              
+            elif token in token3:
+                tabela_tokens.write('{},terminador de linha,{},({},{})\n'.format(token,len(token),m,espacos + tam))
+
+            elif token in token4:
+                tabela_tokens.write('{},identificador,{},({},{})\n'.format(token,len(token),m,espacos + tam))
             
-            elif row[col] in token5:
-                if row[col] != ' ':
-                    lista.append(row[col])
-                    print(lista)
-                    numero = ''
-                    for n in lista:
-                        numero = '{}{}'.format(numero,n)
-                tabela_tokens.write('{},número,{},({},{})\n'.format(numero,len(lista),m,col))
+            else:
+                eh_numero = False
+                for caract in token:
+                    if caract in token5:
+                        eh_numero = True
+                if eh_numero:
+                    tabela_tokens.write('{},número,{},({},{})\n'.format(token,len(token),m,espacos + tam))                
+
+            
+            espacos += 1
+            tam += len(token)
+        m += 1
