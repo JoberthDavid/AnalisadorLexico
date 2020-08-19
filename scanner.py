@@ -68,11 +68,14 @@ with open(file_to_be_analyzed, "r") as file_handler:
                 tabela_tokens.write('{},identificador,{},{},{}\n'.format(token,len(token),m,espacos + tam))
             
             else:
-                eh_numero = False
+                eh_numero = []
                 for caract in token:
                     if caract in token5:
-                        eh_numero = True
-                if eh_numero:
+                        eh_numero.append(True)
+                    else:
+                        eh_numero.append(False)
+
+                if eh_numero and (False not in eh_numero):
                     tabela_tokens.write('{},número,{},{},{}\n'.format(token,len(token),m,espacos + tam))
 
             if token != '':
