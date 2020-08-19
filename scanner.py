@@ -73,7 +73,7 @@ with open(file_to_be_analyzed, "r") as file_handler:
                     if caract in token5:
                         eh_numero = True
                 if eh_numero:
-                    tabela_tokens.write('{},número,{},{},{}\n'.format(token,len(token),m,espacos + tam))                
+                    tabela_tokens.write('{},número,{},{},{}\n'.format(token,len(token),m,espacos + tam))
 
             if token != '':
                 tabela_simbolos.write('{},{}\n'.format(i,token))

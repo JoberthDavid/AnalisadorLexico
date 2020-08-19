@@ -18,9 +18,3 @@ i,identificador,1,1,18
 i,identificador,1,1,23
 +,operador,1,1,25
 ;,terminador de linha,1,1,28
-256,número,3,2,8
-i,identificador,1,2,15
-=,operador,1,2,17
-i,identificador,1,2,20
-+,operador,1,2,22
-;,terminador de linha,1,2,25
