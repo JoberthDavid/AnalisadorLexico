@@ -1,13 +1,4 @@
-while,palavra reservada,5,0,0
-i,identificador,1,0,6
-<,operador,1,0,8
-100,número,3,0,11
-do,palavra reservada,2,0,15
-i,identificador,1,0,18
-=,operador,1,0,20
-i,identificador,1,0,23
-+,operador,1,0,25
-;,terminador de linha,1,0,28
+Erro na linha 0, coluna 0
 while,palavra reservada,5,1,0
 i,identificador,1,1,6
 <,operador,1,1,8

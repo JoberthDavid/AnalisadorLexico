@@ -53,35 +53,44 @@ with open(file_to_be_analyzed, "r") as file_handler:
         tam = 0
         i = 1
 
+
         for token in lista:
 
-            if token in token1:
-                tabela_tokens.write('{},palavra reservada,{},{},{}\n'.format(token,len(token),m,espacos + tam))
-
-            elif token in token2:
-                tabela_tokens.write('{},operador,{},{},{}\n'.format(token,len(token),m,espacos + tam))
-              
-            elif token in token3:
-                tabela_tokens.write('{},terminador de linha,{},{},{}\n'.format(token,len(token),m,espacos + tam))
-
-            elif token in token4:
-                tabela_tokens.write('{},identificador,{},{},{}\n'.format(token,len(token),m,espacos + tam))
-            
-            else:
-                eh_numero = []
-                for caract in token:
-                    if caract in token5:
-                        eh_numero.append(True)
-                    else:
-                        eh_numero.append(False)
-
-                if eh_numero and (False not in eh_numero):
-                    tabela_tokens.write('{},número,{},{},{}\n'.format(token,len(token),m,espacos + tam))
-
             if token != '':
+
+                if (token[0] == 'w') or (token[0] == 'd'):
+                    if token in token1:
+                        tabela_tokens.write('{},palavra reservada,{},{},{}\n'.format(token,len(token),m,espacos + tam))
+                    else:
+                        resposta = 'Erro na linha {}, coluna {}\n'.format(m,espacos + tam)
+                        tabela_tokens.write(resposta)
+                        print(resposta)
+                        break
+
+                elif token in token2:
+                    tabela_tokens.write('{},operador,{},{},{}\n'.format(token,len(token),m,espacos + tam))
+                
+                elif token in token3:
+                    tabela_tokens.write('{},terminador de linha,{},{},{}\n'.format(token,len(token),m,espacos + tam))
+
+                elif token in token4:
+                    tabela_tokens.write('{},identificador,{},{},{}\n'.format(token,len(token),m,espacos + tam))
+                
+                else:
+                    eh_numero = []
+                    for caract in token:
+                        if caract in token5:
+                            eh_numero.append(True)
+                        else:
+                            eh_numero.append(False)
+
+                    if eh_numero and (False not in eh_numero):
+                        tabela_tokens.write('{},número,{},{},{}\n'.format(token,len(token),m,espacos + tam))
+
+
                 tabela_simbolos.write('{},{}\n'.format(i,token))
             
-            i += 1
+                i += 1
             espacos += 1
             tam += len(token)
         m += 1
